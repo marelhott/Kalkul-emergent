@@ -60,6 +60,50 @@ body {
   color: rgba(51, 65, 85, 0.6);
 }
 
+/* Prominent Input Styles */
+.prominent-input-section {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.prominent-input-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.prominent-input {
+  width: 100%;
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  border-radius: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #334155;
+  transition: all 0.3s ease;
+  outline: none;
+  text-align: center;
+}
+
+.prominent-input:focus {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: #3b82f6;
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.2),
+    0 6px 24px rgba(59, 130, 246, 0.2);
+  transform: translateY(-2px);
+}
+
 /* Typography */
 .section-title {
   font-size: 20px;
@@ -79,6 +123,23 @@ body {
   font-weight: 500;
   color: #475569;
   margin-bottom: 8px;
+}
+
+.required-text {
+  font-size: 12px;
+  color: #ef4444;
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* Price Display */
+.price-display {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 32px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1;
 }
 
 /* Icon Styles */
@@ -165,8 +226,6 @@ body {
 
 /* Order Button */
 .order-button {
-  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
-  color: white;
   border: none;
   border-radius: 16px;
   padding: 18px 36px;
@@ -177,15 +236,32 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
   box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-button-active {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+  color: white;
+  box-shadow: 
     0 8px 24px rgba(245, 158, 11, 0.3),
     0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.order-button:hover:not(:disabled) {
+.order-button-active:hover:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 
     0 12px 32px rgba(245, 158, 11, 0.4),
     0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.order-button-disabled {
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+  color: #f1f5f9;
+  cursor: not-allowed;
+  box-shadow: 
+    0 8px 24px rgba(148, 163, 184, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .order-button:active:not(:disabled) {
@@ -193,8 +269,6 @@ body {
 }
 
 .order-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
   transform: none;
 }
 
@@ -213,6 +287,15 @@ body {
   .glass-input {
     padding: 14px 16px;
     font-size: 16px;
+  }
+
+  .prominent-input {
+    padding: 16px 20px;
+    font-size: 18px;
+  }
+
+  .price-display {
+    font-size: 3rem;
   }
   
   .radio-option {
@@ -266,6 +349,7 @@ body {
 
 /* Focus styles for accessibility */
 .glass-input:focus,
+.prominent-input:focus,
 .radio-option:focus-within,
 .order-button:focus {
   outline: 2px solid rgba(59, 130, 246, 0.6);

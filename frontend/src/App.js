@@ -26,6 +26,9 @@ function App() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
+  // Check if order button should be enabled
+  const isOrderEnabled = formData.email.trim() !== '' && formData.phone.trim() !== '';
+
   // Update price calculation
   useEffect(() => {
     updatePrice();
@@ -128,7 +131,7 @@ function App() {
                 <span className="icon">🏠</span>
                 Typ plochy *
               </h3>
-              <div className="radio-group">
+              <div className="radio-group mb-6">
                 <label className="radio-option">
                   <input
                     type="radio"
@@ -153,6 +156,20 @@ function App() {
                   <span className="icon">🧱</span>
                   Plocha stěny
                 </label>
+              </div>
+
+              <div className="prominent-input-section">
+                <label className="prominent-input-label">
+                  <span className="icon">📏</span>
+                  Celková plocha (m²) - bílá barva *
+                </label>
+                <input
+                  type="number"
+                  className="prominent-input"
+                  value={formData.totalArea}
+                  onChange={(e) => handleInputChange('totalArea', e.target.value)}
+                  placeholder="0"
+                />
               </div>
 
               <div className="mt-6">
@@ -210,20 +227,6 @@ function App() {
                     Žádné
                   </label>
                 </div>
-              </div>
-
-              <div className="mt-6">
-                <label className="input-label">
-                  <span className="icon">📏</span>
-                  Celková plocha (m²) - bílá barva *
-                </label>
-                <input
-                  type="number"
-                  className="glass-input"
-                  value={formData.totalArea}
-                  onChange={(e) => handleInputChange('totalArea', e.target.value)}
-                  placeholder="0"
-                />
               </div>
             </div>
 
@@ -465,14 +468,14 @@ function App() {
           <div className="lg:col-span-1">
             <div className="glass-panel sticky top-4">
               <div className="text-center">
-                <div className="text-3xl font-bold text-gray-800 mb-4">
+                <div className="price-display">
                   {totalPrice.toLocaleString('cs-CZ')} Kč
                 </div>
                 
                 <button
                   onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="order-button w-full mb-6"
+                  disabled={isSubmitting || !isOrderEnabled}
+                  className={`order-button w-full mb-6 ${isOrderEnabled ? 'order-button-active' : 'order-button-disabled'}`}
                 >
                   {isSubmitting ? 'Moment...' : submitMessage === 'Poptávka odeslána!' ? 'Děkujeme' : 'OBJEDNAT'}
                 </button>
@@ -513,7 +516,7 @@ function App() {
                   <div>
                     <label className="input-label">
                       <span className="icon">📞</span>
-                      Telefonní číslo *
+                      Telefonní číslo * <span className="required-text">(nutné vyplnit)</span>
                     </label>
                     <input
                       type="tel"
@@ -527,7 +530,7 @@ function App() {
                   <div>
                     <label className="input-label">
                       <span className="icon">📧</span>
-                      E-mail *
+                      E-mail * <span className="required-text">(nutné vyplnit)</span>
                     </label>
                     <input
                       type="email"
