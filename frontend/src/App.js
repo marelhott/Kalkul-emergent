@@ -516,8 +516,9 @@ function App() {
                   <div>
                     <label className="input-label">
                       <span className="icon">📞</span>
-                      Telefonní číslo * <span className="required-text">(nutné vyplnit)</span>
+                      Telefonní číslo
                     </label>
+                    <div className="required-text-below">(nutné vyplnit)</div>
                     <input
                       type="tel"
                       className="glass-input"
@@ -530,8 +531,9 @@ function App() {
                   <div>
                     <label className="input-label">
                       <span className="icon">📧</span>
-                      E-mail * <span className="required-text">(nutné vyplnit)</span>
+                      E-mail
                     </label>
+                    <div className="required-text-below">(nutné vyplnit)</div>
                     <input
                       type="email"
                       className="glass-input"
