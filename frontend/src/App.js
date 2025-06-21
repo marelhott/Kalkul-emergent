@@ -492,9 +492,9 @@ function App() {
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting || !isOrderEnabled}
-                  className={`order-button w-full mb-6 ${isOrderEnabled ? 'order-button-active' : 'order-button-disabled'}`}
+                  className={`${getButtonClass()} w-full mb-6`}
                 >
-                  {isSubmitting ? 'Moment...' : submitMessage === 'Poptávka odeslána!' ? 'Děkujeme' : 'OBJEDNAT'}
+                  {getButtonText()}
                 </button>
 
                 {/* Contact Information */}
