@@ -27,8 +27,19 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
-  // Check if order button should be enabled
-  const isOrderEnabled = formData.email.trim() !== '' && formData.phone.trim() !== '';
+  // Get button class and text based on state
+  const getButtonClass = () => {
+    if (isSubmitted) return 'order-button order-button-success';
+    if (isSubmitting) return 'order-button order-button-submitting';
+    if (isOrderEnabled) return 'order-button order-button-active';
+    return 'order-button order-button-disabled';
+  };
+
+  const getButtonText = () => {
+    if (isSubmitted) return '👍 ODESLÁNO';
+    if (isSubmitting) return 'ODESÍLÁM';
+    return 'OBJEDNAT';
+  };
 
   // Update price calculation
   useEffect(() => {
