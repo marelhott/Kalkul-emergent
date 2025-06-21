@@ -257,12 +257,28 @@ body {
     0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-.order-button-disabled {
+.order-button-submitting {
   background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
   color: #f1f5f9;
-  cursor: not-allowed;
+  cursor: wait;
   box-shadow: 
     0 8px 24px rgba(148, 163, 184, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-button-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  cursor: default;
+  box-shadow: 
+    0 8px 24px rgba(16, 185, 129, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-button-success:hover {
+  transform: none;
+  box-shadow: 
+    0 8px 24px rgba(16, 185, 129, 0.3),
     0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
