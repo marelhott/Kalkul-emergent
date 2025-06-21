@@ -27,6 +27,9 @@ function App() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
+  // Check if order button should be enabled
+  const isOrderEnabled = formData.email.trim() !== '' && formData.phone.trim() !== '';
+
   // Get button class and text based on state
   const getButtonClass = () => {
     if (isSubmitted) return 'order-button order-button-success';
