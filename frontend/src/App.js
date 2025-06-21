@@ -88,12 +88,14 @@ function App() {
     }
 
     setIsSubmitting(true);
-    setSubmitMessage('Odesílání...');
+    setIsSubmitted(false);
+    setSubmitMessage('');
 
     try {
       // Simulace odeslání (zde by byla API call)
       await new Promise(resolve => setTimeout(resolve, 2000));
       
+      setIsSubmitted(true);
       setSubmitMessage('Poptávka odeslána!');
       console.log('Form submitted:', { ...formData, calculatedPrice: totalPrice });
     } catch (error) {
