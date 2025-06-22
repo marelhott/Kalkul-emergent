@@ -150,17 +150,27 @@ function App() {
         to_email: 'info@malirivcernem.cz'
       };
 
-      console.log('Odesílám email s daty:', emailData);
+      console.log('Odesílám emaily s daty:', emailData);
 
-      // Odeslání emailu pomocí EmailJS
-      const response = await emailjs.send(
+      // Email 1: Pro firmu (info@malirivcernem.cz)
+      const businessEmailResponse = await emailjs.send(
         EMAILJS_CONFIG.serviceID,
-        EMAILJS_CONFIG.templateID,
+        EMAILJS_CONFIG.businessTemplateID,
         emailData,
         EMAILJS_CONFIG.publicKey
       );
 
-      console.log('Email úspěšně odeslán!', response.status, response.text);
+      console.log('Email pro firmu úspěšně odeslán!', businessEmailResponse.status);
+
+      // Email 2: Pro zákazníka
+      const customerEmailResponse = await emailjs.send(
+        EMAILJS_CONFIG.serviceID,
+        EMAILJS_CONFIG.customerTemplateID,
+        emailData,
+        EMAILJS_CONFIG.publicKey
+      );
+
+      console.log('Email pro zákazníka úspěšně odeslán!', customerEmailResponse.status);
       
       setIsSubmitted(true);
       setSubmitMessage('Poptávka odeslána!');
