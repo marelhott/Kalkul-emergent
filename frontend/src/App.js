@@ -193,16 +193,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-4 relative">
-      {/* Floating background orbs */}
-      <div className="background-orbs">
-        <div className="orb"></div>
-        <div className="orb"></div>
-        <div className="orb"></div>
-        <div className="orb"></div>
-      </div>
-
-      <div className="max-w-4xl mx-auto relative">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="glass-panel text-center py-8 mb-8">
           <h1 className="text-4xl font-bold text-gray-700 mb-2">
