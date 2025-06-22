@@ -113,15 +113,60 @@ function App() {
     setSubmitMessage('');
 
     try {
-      // Simulace odeslání (zde by byla API call)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Příprava dat pro email
+      const emailData = {
+        // Základní informace
+        customer_name: formData.name || 'Neuvedeno',
+        customer_email: formData.email,
+        customer_phone: formData.phone,
+        customer_address: formData.address || 'Neuvedeno',
+        
+        // Typ práce a plocha
+        work_type: formData.selectedWork === 'Půdorys' ? 'Plocha podlahy' : 'Plocha stěny',
+        total_area: formData.totalArea || '0',
+        
+        // Typ opravy
+        repair_type: formData.repairType || 'Neuvedeno',
+        
+        // Služby
+        material_provided: formData.material === 'Ano' ? 'Ano' : 'Ne',
+        furniture_moving: formData.furnitureMoving === 'Ano' ? 'Ano' : 'Ne',
+        empty_space: formData.emptySpace === 'Ano' ? 'Ano' : 'Ne',
+        carpets: formData.carpets === 'Ano' ? 'Ano' : 'Ne',
+        
+        // Dodatečné informace
+        rooms_count: formData.rooms || 'Neuvedeno',
+        ceiling_height: formData.ceilingHeight || 'Neuvedeno',
+        space_type: formData.spaceType || 'Neuvedeno',
+        preferred_date: formData.date || 'Neuvedeno',
+        additional_info: formData.additionalInfo || 'Žádné dodatečné informace',
+        
+        // Kalkulace
+        calculated_price: totalPrice.toLocaleString('cs-CZ'),
+        
+        // Metadata
+        timestamp: new Date().toLocaleString('cs-CZ'),
+        to_email: 'info@malirivcernem.cz'
+      };
+
+      console.log('Odesílám email s daty:', emailData);
+
+      // Odeslání emailu pomocí EmailJS
+      const response = await emailjs.send(
+        EMAILJS_CONFIG.serviceID,
+        EMAILJS_CONFIG.templateID,
+        emailData,
+        EMAILJS_CONFIG.publicKey
+      );
+
+      console.log('Email úspěšně odeslán!', response.status, response.text);
       
       setIsSubmitted(true);
       setSubmitMessage('Poptávka odeslána!');
-      console.log('Form submitted:', { ...formData, calculatedPrice: totalPrice });
+      
     } catch (error) {
+      console.error('Chyba při odesílání emailu:', error);
       setSubmitMessage('Chyba při odesílání. Zkuste to znovu.');
-      console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
