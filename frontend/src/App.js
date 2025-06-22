@@ -49,7 +49,7 @@ function App() {
   const getButtonText = () => {
     if (isSubmitted) return '👍 ODESLÁNO';
     if (isSubmitting) return 'ODESÍLÁM';
-    return 'OBJEDNAT';
+    return 'ODESLAT';
   };
 
   // Update price calculation
