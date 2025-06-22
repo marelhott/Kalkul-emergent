@@ -319,7 +319,7 @@ function App() {
 
             {/* Materials and Services */}
             <div className="glass-panel">
-              <h3 className="section-title">
+              <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
                 <span className="icon">🎨</span>
                 Materiál a služby *
               </h3>
