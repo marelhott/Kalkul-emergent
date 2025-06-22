@@ -150,9 +150,10 @@ function App() {
         to_email: 'info@malirivcernem.cz'
       };
 
-      console.log('Odesílám emaily s daty:', emailData);
+      console.log('🔄 Začínám odesílání emailů...');
 
       // Email 1: Pro firmu (info@malirivcernem.cz)
+      console.log('📧 Odesílám email pro firmu...');
       const businessEmailResponse = await emailjs.send(
         EMAILJS_CONFIG.serviceID,
         EMAILJS_CONFIG.businessTemplateID,
@@ -160,23 +161,31 @@ function App() {
         EMAILJS_CONFIG.publicKey
       );
 
-      console.log('Email pro firmu úspěšně odeslán!', businessEmailResponse.status);
+      console.log('✅ Email pro firmu úspěšně odeslán!', businessEmailResponse);
 
-      // Email 2: Pro zákazníka
+      // Email 2: Pro zákazníka - příprava dat
+      const customerEmailData = {
+        ...emailData,
+        to_email: formData.email // Změníme recipient na zákazníka
+      };
+
+      console.log('📧 Odesílám email pro zákazníka na:', formData.email);
       const customerEmailResponse = await emailjs.send(
         EMAILJS_CONFIG.serviceID,
         EMAILJS_CONFIG.customerTemplateID,
-        emailData,
+        customerEmailData,
         EMAILJS_CONFIG.publicKey
       );
 
-      console.log('Email pro zákazníka úspěšně odeslán!', customerEmailResponse.status);
+      console.log('✅ Email pro zákazníka úspěšně odeslán!', customerEmailResponse);
       
+      // Úspěch - nastavíme stavy
       setIsSubmitted(true);
-      setSubmitMessage('Poptávka odeslána!');
+      setSubmitMessage('Oba emaily úspěšně odeslány!');
       
     } catch (error) {
-      console.error('Chyba při odesílání emailu:', error);
+      console.error('❌ Chyba při odesílání emailu:', error);
+      setIsSubmitted(false);
       setSubmitMessage('Chyba při odesílání. Zkuste to znovu.');
     } finally {
       setIsSubmitting(false);
