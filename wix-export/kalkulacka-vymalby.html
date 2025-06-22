@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulačka nákladů na výmalbu</title>
+    
+    <!-- EmailJS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .kalkulacka-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 50%, #3b82f6 100%);
+            padding: 16px;
+        }
+
+        .kalkulacka-max-width {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Glassmorphism Components */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 32px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 
+                0 12px 48px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .glass-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 16px;
+            font-size: 16px;
+            color: #334155;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .glass-input:focus {
+            background: rgba(255, 255, 255, 0.5);
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 
+                0 0 0 3px rgba(59, 130, 246, 0.1),
+                0 4px 20px rgba(59, 130, 246, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .glass-input::placeholder {
+            color: rgba(51, 65, 85, 0.6);
+        }
+
+        /* Prominent Input Styles */
+        .prominent-input-section {
+            margin: 24px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .prominent-input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .prominent-input {
+            width: 100%;
+            padding: 20px 24px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            border-radius: 16px;
+            font-size: 20px;
+            font-weight: 600;
+            color: #334155;
+            transition: all 0.3s ease;
+            outline: none;
+            text-align: center;
+        }
+
+        .prominent-input:focus {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: #3b82f6;
+            box-shadow: 
+                0 0 0 3px rgba(59, 130, 246, 0.2),
+                0 6px 24px rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Typography */
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 8px;
+        }
+
+        .required-text-below {
+            font-size: 12px;
+            color: #ef4444;
+            font-weight: 600;
+            font-style: italic;
+            margin-bottom: 8px;
+            margin-top: -4px;
+        }
+
+        /* Price Display */
+        .price-display {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 32px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1;
+        }
+
+        /* Icon Styles */
+        .icon {
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+        }
+
+        .section-title .icon {
+            font-size: 20px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .radio-option .icon {
+            margin-right: 4px;
+        }
+
+        /* Radio Button Styles */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(4px);
+        }
+
+        .radio-option input[type="radio"] {
+            display: none;
+        }
+
+        .radio-custom {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(59, 130, 246, 0.6);
+            border-radius: 50%;
+            margin-right: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-custom {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .radio-option input[type="radio"]:checked + .radio-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+        }
+
+        .radio-option span:not(.radio-custom):not(.icon) {
+            font-size: 15px;
+            color: #334155;
+            font-weight: 500;
+        }
+
+        /* Order Button */
+        .order-button {
+            border: none;
+            border-radius: 16px;
+            padding: 18px 36px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.2),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button-active {
+            background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+            color: white;
+            box-shadow: 
+                0 8px 24px rgba(245, 158, 11, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button-active:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 12px 32px rgba(245, 158, 11, 0.4),
+                0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .order-button-disabled {
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+            color: #f1f5f9;
+            cursor: not-allowed;
+            box-shadow: 
+                0 8px 24px rgba(148, 163, 184, 0.2),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button-submitting {
+            background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+            color: #f1f5f9;
+            cursor: wait;
+            box-shadow: 
+                0 8px 24px rgba(148, 163, 184, 0.2),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            cursor: default;
+            box-shadow: 
+                0 8px 24px rgba(16, 185, 129, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button-success:hover {
+            transform: none;
+            box-shadow: 
+                0 8px 24px rgba(16, 185, 129, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-button:active:not(:disabled) {
+            transform: translateY(-1px);
+        }
+
+        .order-button:disabled {
+            transform: none;
+        }
+
+        /* Grid Layouts */
+        .grid-lg-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+
+        .grid-md-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .space-y-6 > * + * {
+            margin-top: 24px;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 16px;
+        }
+
+        .grid-cols-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .grid-md-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-lg-3 {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .glass-panel {
+                padding: 24px;
+                border-radius: 20px;
+            }
+            
+            .section-title {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+            
+            .glass-input {
+                padding: 14px 16px;
+                font-size: 16px;
+            }
+
+            .prominent-input {
+                padding: 16px 20px;
+                font-size: 18px;
+            }
+
+            .price-display {
+                font-size: 2rem;
+            }
+            
+            .radio-option {
+                padding: 10px 14px;
+            }
+            
+            .order-button {
+                padding: 16px 32px;
+                font-size: 16px;
+            }
+
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        .mb-2 { margin-bottom: 8px; }
+        .mb-4 { margin-bottom: 16px; }
+        .mb-6 { margin-bottom: 24px; }
+        .mb-8 { margin-bottom: 32px; }
+        .mt-2 { margin-top: 8px; }
+        .mt-4 { margin-top: 16px; }
+        .mt-6 { margin-top: 24px; }
+        .py-8 { padding-top: 32px; padding-bottom: 32px; }
+        .w-full { width: 100%; }
+        .sticky { position: sticky; top: 16px; }
+        .text-4xl { font-size: 2.25rem; }
+        .font-bold { font-weight: 700; }
+        .text-gray-800 { color: #1f2937; }
+        .text-gray-600 { color: #4b5563; }
+        .text-red-600 { color: #dc2626; }
+        .text-green-600 { color: #16a34a; }
+        .text-sm { font-size: 14px; }
+        .leading-relaxed { line-height: 1.625; }
+        .max-w-2xl { max-width: 42rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .w-16 { width: 4rem; }
+        .h-1 { height: 0.25rem; }
+        .bg-gradient-to-r { background-image: linear-gradient(to right, var(--tw-gradient-stops)); }
+        .from-yellow-400 { --tw-gradient-from: #facc15; }
+        .to-orange-400 { --tw-gradient-to: #fb923c; }
+        .min-h-100 { min-height: 100px; }
+        .resize-none { resize: none; }
+
+        /* Animation for smooth transitions */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glass-panel {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="kalkulacka-container">
+        <div class="kalkulacka-max-width">
+            <!-- Header -->
+            <div class="glass-panel text-center py-8 mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">
+                    Cena a termín
+                </h1>
+                <div class="w-16 h-1 bg-gradient-to-r mx-auto mb-4" style="background: linear-gradient(to right, #facc15, #fb923c);"></div>
+                <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+                    Spočítejte si sami cenu a určete termín startu realizace zakázky. Ceny jsou přibližné. 
+                    Přesnou cenu určíme vždy až osobně na místě.
+                </p>
+                <p class="text-gray-600 leading-relaxed max-w-2xl mx-auto mt-2">
+                    Pokud jste s přibližnou cenou spokojeni vyplňte prosím všechna pole a klikněte 
+                    na objednat. Ozvěme se Vám nejpozději do 24 hodin a domluvíme podrobnosti.
+                </p>
+            </div>
+
+            <div class="grid-lg-3">
+                <!-- Left Column -->
+                <div class="space-y-6">
+                    <!-- Type and Area -->
+                    <div class="glass-panel">
+                        <h3 class="section-title">
+                            <span class="icon">🏠</span>
+                            Typ plochy *
+                        </h3>
+                        <div class="radio-group mb-6">
+                            <label class="radio-option">
+                                <input type="radio" name="selectedWork" value="Půdorys" id="pudorys" checked>
+                                <span class="radio-custom"></span>
+                                <span class="icon">📐</span>
+                                Plocha podlahy
+                            </label>
+                            <label class="radio-option">
+                                <input type="radio" name="selectedWork" value="Stěna" id="stena">
+                                <span class="radio-custom"></span>
+                                <span class="icon">🧱</span>
+                                Plocha stěny
+                            </label>
+                        </div>
+
+                        <div class="prominent-input-section">
+                            <label class="prominent-input-label">
+                                <span class="icon">📏</span>
+                                Celková plocha (m²) - bílá barva *
+                            </label>
+                            <input type="number" id="totalArea" class="prominent-input" placeholder="0">
+                        </div>
+
+                        <div class="mt-6">
+                            <h3 class="section-title">
+                                <span class="icon">🔧</span>
+                                Typ opravy *
+                            </h3>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="repairType" value="Malé" id="male">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🔨</span>
+                                    Malé
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="repairType" value="Střední" id="stredni">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🛠️</span>
+                                    Střední
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="repairType" value="Velké" id="velke">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">⚒️</span>
+                                    Velké
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="repairType" value="Žádné" id="zadne">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">✨</span>
+                                    Žádné
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materials and Services -->
+                    <div class="glass-panel">
+                        <h3 class="section-title">
+                            <span class="icon">🎨</span>
+                            Materiál a služby *
+                        </h3>
+                        <div class="grid-md-2" style="gap: 32px;">
+                            <div>
+                                <label class="input-label mb-3" style="display: block;">
+                                    <span class="icon">🪣</span>
+                                    Barva zajistit malíř? *
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="material" value="Ano" id="materialAno">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">✅</span>
+                                        Ano
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="material" value="Ne" id="materialNe">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">❌</span>
+                                        Ne
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="input-label mb-3" style="display: block;">
+                                    <span class="icon">📦</span>
+                                    Posunutí a zakrytí nábytku? *
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="furnitureMoving" value="Ano" id="furnitureAno">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">✅</span>
+                                        Ano
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="furnitureMoving" value="Ne" id="furnitureNe">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">❌</span>
+                                        Ne
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid-md-2 mt-6" style="gap: 32px;">
+                            <div>
+                                <label class="input-label mb-3" style="display: block;">
+                                    <span class="icon">🏠</span>
+                                    Prázdný (nezařizený) prostor? *
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="emptySpace" value="Ano" id="emptyAno">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">✅</span>
+                                        Ano
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="emptySpace" value="Ne" id="emptyNe">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">❌</span>
+                                        Ne
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="input-label mb-3" style="display: block;">
+                                    <span class="icon">🪟</span>
+                                    Koberce na podlaze *
+                                </label>
+                                <div class="radio-group">
+                                    <label class="radio-option">
+                                        <input type="radio" name="carpets" value="Ano" id="carpetsAno">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">✅</span>
+                                        Ano
+                                    </label>
+                                    <label class="radio-option">
+                                        <input type="radio" name="carpets" value="Ne" id="carpetsNe">
+                                        <span class="radio-custom"></span>
+                                        <span class="icon">❌</span>
+                                        Ne
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Details -->
+                    <div class="glass-panel">
+                        <h3 class="section-title">
+                            <span class="icon">📋</span>
+                            Dodatečné informace
+                        </h3>
+                        <div class="grid-md-2 mb-4">
+                            <div>
+                                <label class="input-label">
+                                    <span class="icon">🚪</span>
+                                    Počet místností *
+                                </label>
+                                <input type="number" id="rooms" class="glass-input">
+                            </div>
+                            <div>
+                                <label class="input-label">
+                                    <span class="icon">📐</span>
+                                    Výška stropu (cm) *
+                                </label>
+                                <input type="number" id="ceilingHeight" class="glass-input">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="input-label mb-3" style="display: block;">
+                                <span class="icon">🏢</span>
+                                Typ prostoru *
+                            </label>
+                            <div class="radio-group grid-cols-2">
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Pokoj" id="pokoj" checked>
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🛏️</span>
+                                    Pokoj
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Byt" id="byt">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🏠</span>
+                                    Byt
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Dům" id="dum">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🏡</span>
+                                    Dům
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Společné prostory (chodby, schodiště atd)" id="spolecne">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🚶</span>
+                                    Společné prostory (chodby, schodiště atd)
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Kancelář, ordinace atd" id="kancelar">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">💼</span>
+                                    Kancelář, ordinace atd
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Pension/hotel" id="pension">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🏨</span>
+                                    Pension/hotel
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="spaceType" value="Komerční prostory (obchody, kavárna, restaurace atd)" id="komercni">
+                                    <span class="radio-custom"></span>
+                                    <span class="icon">🏪</span>
+                                    Komerční prostory (obchody, kavárna, restaurace atd)
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="input-label">
+                                <span class="icon">📅</span>
+                                Preferované datum *
+                            </label>
+                            <input type="date" id="date" class="glass-input">
+                        </div>
+
+                        <div>
+                            <label class="input-label">
+                                <span class="icon">💬</span>
+                                Doplňující informace *
+                            </label>
+                            <textarea id="additionalInfo" class="glass-input min-h-100 resize-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Price Display and Contact -->
+                <div>
+                    <div class="glass-panel sticky">
+                        <div class="text-center">
+                            <div class="price-display" id="priceDisplay">
+                                0 Kč
+                            </div>
+                            
+                            <button id="orderButton" class="order-button order-button-disabled w-full mb-6">
+                                OBJEDNAT
+                            </button>
+
+                            <!-- Contact Information -->
+                            <div class="space-y-4" style="text-align: left;">
+                                <h3 class="section-title text-center">
+                                    <span class="icon">📞</span>
+                                    Kontaktní údaje
+                                </h3>
+                                
+                                <div>
+                                    <label class="input-label">
+                                        <span class="icon">👤</span>
+                                        Vaše jméno *
+                                    </label>
+                                    <input type="text" id="name" class="glass-input">
+                                </div>
+
+                                <div>
+                                    <label class="input-label">
+                                        <span class="icon">📍</span>
+                                        Adresa výmalby *
+                                    </label>
+                                    <input type="text" id="address" class="glass-input">
+                                </div>
+
+                                <div>
+                                    <label class="input-label">
+                                        <span class="icon">📞</span>
+                                        Telefonní číslo
+                                    </label>
+                                    <div class="required-text-below">(nutné vyplnit)</div>
+                                    <input type="tel" id="phone" class="glass-input" placeholder="+420">
+                                </div>
+
+                                <div>
+                                    <label class="input-label">
+                                        <span class="icon">📧</span>
+                                        E-mail
+                                    </label>
+                                    <div class="required-text-below">(nutné vyplnit)</div>
+                                    <input type="email" id="email" class="glass-input" placeholder="@">
+                                </div>
+                            </div>
+
+                            <div id="submitMessage" style="margin-top: 16px; font-size: 14px;"></div>
+                        </div>
+
+                        <div class="mt-8 text-gray-600" style="font-size: 12px; line-height: 1.4;">
+                            <p>• K celkové ceně je už v online kalkulaci automaticky připočtena cena za úklid.</p>
+                            <p>• Podkladová penetrace není součástí kalkulace a bude započtena jen o případě.</p>
+                            <p>• Cena může dále výjimečně kolísat u cenách nemovitostí plus. Všechny ostatní služby nezapoctené
+                            dispěnují snosd budou též během a klientem započteny navíc dle dohody s klientem navíc na místě.</p>
+                            <p>• Uvedená kalkulačka je především informační.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // EmailJS Configuration
+        const EMAILJS_CONFIG = {
+            serviceID: 'service_nis6m4f',
+            businessTemplateID: 'template_cgsqabs',
+            customerTemplateID: 'template_65qsr9b',
+            publicKey: 'tlLoPqBmzHfTBB5Hx'
+        };
+
+        // Initialize EmailJS
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+
+        // Global variables
+        let totalPrice = 0;
+        let isSubmitting = false;
+        let isSubmitted = false;
+
+        // Form data object
+        const formData = {
+            selectedWork: 'Půdorys',
+            totalArea: '',
+            repairType: '',
+            furnitureMoving: '',
+            material: '',
+            name: '',
+            phone: '',
+            email: '',
+            address: '',
+            rooms: '',
+            ceilingHeight: '',
+            spaceType: 'Pokoj',
+            emptySpace: '',
+            carpets: '',
+            date: '',
+            additionalInfo: ''
+        };
+
+        // DOM elements
+        const priceDisplay = document.getElementById('priceDisplay');
+        const orderButton = document.getElementById('orderButton');
+        const submitMessage = document.getElementById('submitMessage');
+
+        // Update price calculation
+        function updatePrice() {
+            let basePrice = 0;
+            let calculatedPrice = 0;
+
+            const area = Number(formData.totalArea) || 0;
+
+            if (area > 0) {
+                // Výpočet základní ceny
+                if (formData.selectedWork === "Půdorys") {
+                    basePrice = area > 20 ? 3000 + (area - 20) * 140 : 3000;
+                } else if (formData.selectedWork === "Stěna") {
+                    basePrice = area > 80 ? 3000 + (area - 80) * 40 : 3000;
+                }
+
+                calculatedPrice = basePrice;
+
+                // Přidání dalších nákladů
+                if (formData.repairType === "Malé") calculatedPrice += basePrice * 0.17;
+                if (formData.repairType === "Střední") calculatedPrice += basePrice * 0.35;
+                if (formData.repairType === "Velké") calculatedPrice += basePrice * 0.80;
+                if (formData.material === "Ano") calculatedPrice += basePrice * 0.20;
+                if (formData.furnitureMoving === "Ano") calculatedPrice += basePrice * 0.12;
+
+                // Příplatek za úklid (vždy)
+                calculatedPrice += basePrice * 0.20;
+
+                // Zaokrouhlení
+                calculatedPrice = Math.round(calculatedPrice);
+            }
+
+            totalPrice = calculatedPrice;
+            priceDisplay.textContent = totalPrice.toLocaleString('cs-CZ') + ' Kč';
+            updateOrderButton();
+        }
+
+        // Update order button state
+        function updateOrderButton() {
+            const isOrderEnabled = formData.email.trim() !== '' && formData.phone.trim() !== '';
+            
+            orderButton.className = 'order-button w-full mb-6 ';
+            
+            if (isSubmitted) {
+                orderButton.className += 'order-button-success';
+                orderButton.textContent = '👍 ODESLÁNO';
+                orderButton.disabled = true;
+            } else if (isSubmitting) {
+                orderButton.className += 'order-button-submitting';
+                orderButton.textContent = 'ODESÍLÁM';
+                orderButton.disabled = true;
+            } else if (isOrderEnabled) {
+                orderButton.className += 'order-button-active';
+                orderButton.textContent = 'OBJEDNAT';
+                orderButton.disabled = false;
+            } else {
+                orderButton.className += 'order-button-disabled';
+                orderButton.textContent = 'OBJEDNAT';
+                orderButton.disabled = true;
+            }
+        }
+
+        // Handle form submission
+        async function handleSubmit() {
+            // Validace
+            if (!formData.email || formData.email.trim() === '') {
+                submitMessage.textContent = 'Prosím, zadejte platný e-mail.';
+                submitMessage.className = 'text-red-600';
+                return;
+            }
+
+            if (!formData.phone || formData.phone.trim() === '') {
+                submitMessage.textContent = 'Prosím, zadejte telefonní číslo.';
+                submitMessage.className = 'text-red-600';
+                return;
+            }
+
+            isSubmitting = true;
+            isSubmitted = false;
+            submitMessage.textContent = '';
+            updateOrderButton();
+
+            try {
+                // Příprava dat pro email
+                const emailData = {
+                    // Základní informace
+                    customer_name: formData.name || 'Neuvedeno',
+                    customer_email: formData.email,
+                    customer_phone: formData.phone,
+                    customer_address: formData.address || 'Neuvedeno',
+                    
+                    // Typ práce a plocha
+                    work_type: formData.selectedWork === 'Půdorys' ? 'Plocha podlahy' : 'Plocha stěny',
+                    total_area: formData.totalArea || '0',
+                    
+                    // Typ opravy
+                    repair_type: formData.repairType || 'Neuvedeno',
+                    
+                    // Služby
+                    material_provided: formData.material === 'Ano' ? 'Ano' : 'Ne',
+                    furniture_moving: formData.furnitureMoving === 'Ano' ? 'Ano' : 'Ne',
+                    empty_space: formData.emptySpace === 'Ano' ? 'Ano' : 'Ne',
+                    carpets: formData.carpets === 'Ano' ? 'Ano' : 'Ne',
+                    
+                    // Dodatečné informace
+                    rooms_count: formData.rooms || 'Neuvedeno',
+                    ceiling_height: formData.ceilingHeight || 'Neuvedeno',
+                    space_type: formData.spaceType || 'Neuvedeno',
+                    preferred_date: formData.date || 'Neuvedeno',
+                    additional_info: formData.additionalInfo || 'Žádné dodatečné informace',
+                    
+                    // Kalkulace
+                    calculated_price: totalPrice.toLocaleString('cs-CZ'),
+                    
+                    // Metadata
+                    timestamp: new Date().toLocaleString('cs-CZ'),
+                    to_email: 'info@malirivcernem.cz'
+                };
+
+                console.log('🔄 Začínám odesílání emailů...');
+
+                // Email 1: Pro firmu (info@malirivcernem.cz)
+                console.log('📧 Odesílám email pro firmu...');
+                const businessEmailResponse = await emailjs.send(
+                    EMAILJS_CONFIG.serviceID,
+                    EMAILJS_CONFIG.businessTemplateID,
+                    emailData
+                );
+
+                console.log('✅ Email pro firmu úspěšně odeslán!', businessEmailResponse);
+
+                // Email 2: Pro zákazníka - příprava dat
+                const customerEmailData = {
+                    ...emailData,
+                    to_email: formData.email // Změníme recipient na zákazníka
+                };
+
+                console.log('📧 Odesílám email pro zákazníka na:', formData.email);
+                const customerEmailResponse = await emailjs.send(
+                    EMAILJS_CONFIG.serviceID,
+                    EMAILJS_CONFIG.customerTemplateID,
+                    customerEmailData
+                );
+
+                console.log('✅ Email pro zákazníka úspěšně odeslán!', customerEmailResponse);
+                
+                // Úspěch - nastavíme stavy
+                isSubmitted = true;
+                submitMessage.textContent = 'Oba emaily úspěšně odeslány!';
+                submitMessage.className = 'text-green-600';
+                
+            } catch (error) {
+                console.error('❌ Chyba při odesílání emailu:', error);
+                isSubmitted = false;
+                submitMessage.textContent = 'Chyba při odesílání. Zkuste to znovu.';
+                submitMessage.className = 'text-red-600';
+            } finally {
+                isSubmitting = false;
+                updateOrderButton();
+            }
+        }
+
+        // Event listeners for form inputs
+        function setupEventListeners() {
+            // Radio button groups
+            document.querySelectorAll('input[name="selectedWork"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.selectedWork = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="repairType"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.repairType = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="material"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.material = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="furnitureMoving"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.furnitureMoving = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="emptySpace"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.emptySpace = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="carpets"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.carpets = e.target.value;
+                    updatePrice();
+                });
+            });
+
+            document.querySelectorAll('input[name="spaceType"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    formData.spaceType = e.target.value;
+                });
+            });
+
+            // Input fields
+            document.getElementById('totalArea').addEventListener('input', (e) => {
+                formData.totalArea = e.target.value;
+                updatePrice();
+            });
+
+            document.getElementById('name').addEventListener('input', (e) => {
+                formData.name = e.target.value;
+            });
+
+            document.getElementById('phone').addEventListener('input', (e) => {
+                formData.phone = e.target.value;
+                updateOrderButton();
+            });
+
+            document.getElementById('email').addEventListener('input', (e) => {
+                formData.email = e.target.value;
+                updateOrderButton();
+            });
+
+            document.getElementById('address').addEventListener('input', (e) => {
+                formData.address = e.target.value;
+            });
+
+            document.getElementById('rooms').addEventListener('input', (e) => {
+                formData.rooms = e.target.value;
+            });
+
+            document.getElementById('ceilingHeight').addEventListener('input', (e) => {
+                formData.ceilingHeight = e.target.value;
+            });
+
+            document.getElementById('date').addEventListener('input', (e) => {
+                formData.date = e.target.value;
+            });
+
+            document.getElementById('additionalInfo').addEventListener('input', (e) => {
+                formData.additionalInfo = e.target.value;
+            });
+
+            // Order button
+            orderButton.addEventListener('click', handleSubmit);
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            updatePrice();
+            updateOrderButton();
+        });
+    </script>
+</body>
+</html>
