@@ -600,20 +600,14 @@ body {
   }
 }
 
+/* Basic fade in for all panels */
 .glass-panel {
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
-.glass-panel:nth-child(odd) {
-  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-panel:nth-child(even) {
-  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
+/* Price display special animation */
 .price-display {
-  animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Stagger animation delays */
@@ -623,10 +617,10 @@ body {
 .glass-panel:nth-child(4) { animation-delay: 0.4s; }
 .glass-panel:nth-child(5) { animation-delay: 0.5s; }
 
-/* All elements start invisible */
+/* Elements start visible but can be animated */
 .glass-panel {
-  opacity: 0;
-  animation-fill-mode: forwards;
+  opacity: 1;
+  animation-fill-mode: both;
 }
 
 /* Custom scrollbar - Light Theme */
