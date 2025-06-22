@@ -6,7 +6,8 @@ function App() {
   // EmailJS configuration
   const EMAILJS_CONFIG = {
     serviceID: 'service_nis6m4f',
-    templateID: 'template_cgsqabs',
+    businessTemplateID: 'template_cgsqabs', // Pro firmu
+    customerTemplateID: 'template_65qsr9b', // Pro zákazníka
     publicKey: 'tlLoPqBmzHfTBB5Hx'
   };
   // Form state
