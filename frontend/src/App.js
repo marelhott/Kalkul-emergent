@@ -460,6 +460,20 @@ function App() {
               </div>
             </div>
 
+            {/* Preferované datum - samostatná sekce */}
+            <div className="glass-panel">
+              <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
+                <span className="icon">📅</span>
+                Preferované datum *
+              </h3>
+              <input
+                type="date"
+                className="glass-input"
+                value={formData.date}
+                onChange={(e) => handleInputChange('date', e.target.value)}
+              />
+            </div>
+
             {/* Additional Details */}
             <div className="glass-panel">
               <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
