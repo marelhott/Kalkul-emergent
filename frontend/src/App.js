@@ -569,7 +569,7 @@ function App() {
 
                 {/* Contact Information */}
                 <div className="space-y-4 text-left">
-                  <h3 className="section-title text-center">
+                  <h3 className="section-title text-center" style={{fontFamily: 'Touche Medium, sans-serif'}}>
                     <span className="icon">📞</span>
                     Kontaktní údaje
                   </h3>
