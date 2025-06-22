@@ -288,10 +288,10 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Order Button - Enhanced Light Theme */
+/* Order Button - Enhanced with Colors */
 .order-button {
   border: none;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 20px 40px;
   font-size: 18px;
   font-weight: 800;
@@ -302,55 +302,41 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: 
-    0 12px 30px rgba(0, 0, 0, 0.15),
-    0 6px 15px rgba(0, 0, 0, 0.08);
-}
-
-.order-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.6s ease;
-}
-
-.order-button:hover::before {
-  left: 100%;
+    0 10px 25px rgba(0, 0, 0, 0.12),
+    0 5px 12px rgba(0, 0, 0, 0.06);
 }
 
 .order-button-active {
-  background: linear-gradient(135deg, #d1d5db 0%, #9ca3af 50%, #6b7280 100%);
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #059669 100%);
   color: white;
   box-shadow: 
-    0 12px 30px rgba(107, 114, 128, 0.4),
+    0 12px 30px rgba(99, 102, 241, 0.4),
     0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .order-button-active:hover:not(:disabled) {
-  transform: translateY(-4px) scale(1.02);
+  transform: translateY(-3px) scale(1.02);
   box-shadow: 
-    0 18px 40px rgba(107, 114, 128, 0.5),
+    0 18px 40px rgba(99, 102, 241, 0.5),
     0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .order-button-disabled {
-  background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-  color: #9ca3af;
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  color: #94a3b8;
   cursor: not-allowed;
+  border: 1.5px solid rgba(226, 232, 240, 0.8);
   box-shadow: 
-    0 8px 20px rgba(156, 163, 175, 0.2),
-    0 4px 10px rgba(0, 0, 0, 0.05);
+    0 6px 15px rgba(148, 163, 184, 0.15),
+    0 3px 8px rgba(0, 0, 0, 0.04);
 }
 
 .order-button-submitting {
-  background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
-  color: #6b7280;
+  background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+  color: #6366f1;
   cursor: wait;
   box-shadow: 
-    0 8px 20px rgba(156, 163, 175, 0.2),
+    0 8px 20px rgba(99, 102, 241, 0.2),
     0 4px 10px rgba(0, 0, 0, 0.05);
   animation: pulse 2s infinite;
 }
@@ -365,11 +351,11 @@ body {
 }
 
 .order-button-success {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #6ee7b7 100%);
+  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 50%, #34d399 100%);
   color: #047857;
   cursor: default;
   box-shadow: 
-    0 12px 30px rgba(16, 185, 129, 0.3),
+    0 12px 30px rgba(52, 211, 153, 0.3),
     0 6px 15px rgba(0, 0, 0, 0.1);
   animation: successPulse 1s ease-out;
 }
@@ -389,12 +375,12 @@ body {
 .order-button-success:hover {
   transform: none;
   box-shadow: 
-    0 12px 30px rgba(16, 185, 129, 0.3),
+    0 12px 30px rgba(52, 211, 153, 0.3),
     0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
 .order-button:active:not(:disabled) {
-  transform: translateY(-2px) scale(0.98);
+  transform: translateY(-1px) scale(0.98);
 }
 
 .order-button:disabled {
