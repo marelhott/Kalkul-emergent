@@ -462,7 +462,7 @@ function App() {
 
             {/* Additional Details */}
             <div className="glass-panel">
-              <h3 className="section-title">
+              <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
                 <span className="icon">📋</span>
                 Dodatečné informace
               </h3>
