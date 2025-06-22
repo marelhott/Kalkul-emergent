@@ -197,7 +197,7 @@ function App() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="glass-panel text-center py-8 mb-8">
-          <h1 className="text-4xl font-bold text-gray-700 mb-2" style={{fontFamily: 'Touche Medium, sans-serif'}}>
+          <h1 className="text-4xl font-bold text-gray-700 mb-2" style={{fontFamily: 'Touche Medium, sans-serif', letterSpacing: '0.05em'}}>
             Cena a termín
           </h1>
           <div className="w-16 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto mb-4"></div>
