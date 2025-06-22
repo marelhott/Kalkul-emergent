@@ -538,19 +538,6 @@ function App() {
                 </div>
               </div>
 
-              <div className="mb-4">
-                <label className="input-label">
-                  <span className="icon">📅</span>
-                  Preferované datum *
-                </label>
-                <input
-                  type="date"
-                  className="glass-input"
-                  value={formData.date}
-                  onChange={(e) => handleInputChange('date', e.target.value)}
-                />
-              </div>
-
               <div>
                 <label className="input-label">
                   <span className="icon">💬</span>
