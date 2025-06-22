@@ -260,7 +260,7 @@ function App() {
               </div>
 
               <div className="mt-6">
-                <h3 className="section-title">
+                <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
                   <span className="icon">🔧</span>
                   Typ opravy *
                 </h3>
