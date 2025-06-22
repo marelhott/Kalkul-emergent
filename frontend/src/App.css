@@ -484,11 +484,11 @@ body {
   }
 }
 
-/* Enhanced Animation System */
+/* Simplified Animation System */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -496,60 +496,15 @@ body {
   }
 }
 
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 /* Basic fade in for all panels */
 .glass-panel {
-  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Price display special animation */
-.price-display {
-  animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-/* Stagger animation delays */
-.glass-panel:nth-child(1) { animation-delay: 0.1s; }
-.glass-panel:nth-child(2) { animation-delay: 0.2s; }
-.glass-panel:nth-child(3) { animation-delay: 0.3s; }
-.glass-panel:nth-child(4) { animation-delay: 0.4s; }
-.glass-panel:nth-child(5) { animation-delay: 0.5s; }
-
-/* Elements start visible but can be animated */
-.glass-panel {
+  animation: fadeInUp 0.6s ease-out;
   opacity: 1;
-  animation-fill-mode: both;
+}
+
+/* Price display */
+.price-display {
+  opacity: 1;
 }
 
 /* Custom scrollbar - Light Theme */
