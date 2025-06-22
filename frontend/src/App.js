@@ -564,7 +564,7 @@ function App() {
                 <button
                   onClick={handleSubmit}
                   disabled={isSubmitting || !isOrderEnabled}
-                  className={`${getButtonClass()} w-full mb-6`}
+                  className={getButtonClass()}
                 >
                   {getButtonText()}
                 </button>
