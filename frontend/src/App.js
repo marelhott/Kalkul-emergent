@@ -40,10 +40,10 @@ function App() {
 
   // Get button class and text based on state
   const getButtonClass = () => {
-    if (isSubmitted) return 'order-button order-button-success';
-    if (isSubmitting) return 'order-button order-button-submitting';
-    if (isOrderEnabled) return 'order-button order-button-active';
-    return 'order-button order-button-disabled';
+    if (isSubmitted) return 'order-button order-button-success w-full mb-6';
+    if (isSubmitting) return 'order-button order-button-submitting w-full mb-6';
+    if (isOrderEnabled) return 'order-button order-button-active w-full mb-6';
+    return 'order-button order-button-disabled w-full mb-6';
   };
 
   const getButtonText = () => {
