@@ -640,7 +640,7 @@ function App() {
                 )}
               </div>
 
-              <div className="mt-8 text-xs text-gray-600 space-y-2">
+              <div className="mt-8 text-xs text-slate-600 space-y-2">
                 <p>• K celkové ceně je už v online kalkulaci automaticky připočtena cena za úklid.</p>
                 <p>• Podkladová penetrace není součástí kalkulace a bude započtena jen o případě.</p>
                 <p>• Cena může dále výjimečně kolísat u cenách nemovitostí plus. Všechny ostatní služby nezapoctené
