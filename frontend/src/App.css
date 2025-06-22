@@ -555,11 +555,11 @@ body {
   }
 }
 
-/* Animation for smooth transitions */
+/* Enhanced Animation System */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px);
   }
   to {
     opacity: 1;
@@ -567,8 +567,66 @@ body {
   }
 }
 
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .glass-panel {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:nth-child(odd) {
+  animation: slideInLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:nth-child(even) {
+  animation: slideInRight 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.price-display {
+  animation: scaleIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Stagger animation delays */
+.glass-panel:nth-child(1) { animation-delay: 0.1s; }
+.glass-panel:nth-child(2) { animation-delay: 0.2s; }
+.glass-panel:nth-child(3) { animation-delay: 0.3s; }
+.glass-panel:nth-child(4) { animation-delay: 0.4s; }
+.glass-panel:nth-child(5) { animation-delay: 0.5s; }
+
+/* All elements start invisible */
+.glass-panel {
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 /* Custom scrollbar */
