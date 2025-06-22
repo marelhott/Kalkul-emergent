@@ -3,6 +3,12 @@ import emailjs from '@emailjs/browser';
 import './App.css';
 
 function App() {
+  // EmailJS configuration
+  const EMAILJS_CONFIG = {
+    serviceID: 'service_nis6m4f',
+    templateID: 'template_cgsqabs',
+    publicKey: 'tlLoPqBmzHfTBB5Hx'
+  };
   // Form state
   const [formData, setFormData] = useState({
     selectedWork: 'Půdorys', // Typ práce
