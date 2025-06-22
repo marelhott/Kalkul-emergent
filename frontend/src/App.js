@@ -193,14 +193,22 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-400 via-slate-500 to-blue-600 p-4">
-      <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 p-4 relative">
+      {/* Floating background orbs */}
+      <div className="background-orbs">
+        <div className="orb"></div>
+        <div className="orb"></div>
+        <div className="orb"></div>
+        <div className="orb"></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative">
         {/* Header */}
         <div className="glass-panel text-center py-8 mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">
+          <h1 className="text-4xl font-bold text-gray-700 mb-2">
             Cena a termín
           </h1>
-          <div className="w-16 h-1 bg-gradient-to-r from-yellow-400 to-orange-400 mx-auto mb-4"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-gray-300 to-gray-400 mx-auto mb-4"></div>
           <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
             Spočítejte si sami cenu a určete termín startu realizace zakázky. Ceny jsou přibližné. 
             Přesnou cenu určíme vždy až osobně na místě.
