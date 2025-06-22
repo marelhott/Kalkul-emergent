@@ -214,7 +214,7 @@ function App() {
           <div className="lg:col-span-2 space-y-6">
             {/* Type and Area */}
             <div className="glass-panel">
-              <h3 className="section-title">
+              <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
                 <span className="icon">🏠</span>
                 Typ plochy *
               </h3>
