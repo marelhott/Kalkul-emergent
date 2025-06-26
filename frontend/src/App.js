@@ -609,18 +609,22 @@ function App() {
 
               <div className="mb-4">
                 <label className="input-label mb-3 block">
-                  <span className="icon">🏢</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l8-4v18"/>
+                    <path d="M19 21V11l-6-4"/>
+                  </svg>
                   Typ prostoru *
                 </label>
                 <div className="radio-group grid grid-cols-2 gap-2">
                   {[
-                    { value: 'Pokoj', icon: '🛏️' },
-                    { value: 'Byt', icon: '🏠' },
-                    { value: 'Dům', icon: '🏡' },
-                    { value: 'Společné prostory (chodby, schodiště atd)', icon: '🚶' },
-                    { value: 'Kancelář, ordinace atd', icon: '💼' },
-                    { value: 'Pension/hotel', icon: '🏨' },
-                    { value: 'Komerční prostory (obchody, kavárna, restaurace atd)', icon: '🏪' }
+                    { value: 'Pokoj', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M7 13h10l4-8H5.4L6 7z"/><path d="M1 1h4l1.68 8.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg> },
+                    { value: 'Byt', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg> },
+                    { value: 'Dům', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg> },
+                    { value: 'Společné prostory (chodby, schodiště atd)', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11l-3-3 3-3"/></svg> },
+                    { value: 'Kancelář, ordinace atd', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg> },
+                    { value: 'Pension/hotel', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg> },
+                    { value: 'Komerční prostory (obchody, kavárna, restaurace atd)', icon: <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M2 8l10-5 10 5-10 5-10-5z"/><path d="M6 10.5V21l6-3 6 3V10.5"/></svg> }
                   ].map((type) => (
                     <label key={type.value} className="radio-option">
                       <input
@@ -631,7 +635,7 @@ function App() {
                         onChange={(e) => handleInputChange('spaceType', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <span className="icon">{type.icon}</span>
+                      {type.icon}
                       {type.value}
                     </label>
                   ))}
@@ -640,7 +644,9 @@ function App() {
 
               <div>
                 <label className="input-label">
-                  <span className="icon">💬</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
                   Doplňující informace *
                 </label>
                 <textarea
