@@ -357,13 +357,21 @@ function App() {
             {/* Materials and Services */}
             <div className="glass-panel">
               <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
-                <span className="icon">🎨</span>
+                <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
                 Materiál a služby *
               </h3>
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <label className="input-label mb-3 block">
-                    <span className="icon">🪣</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 1v6l4-4-4-4"/>
+                      <path d="M8 8v8l4-4-4-4"/>
+                      <circle cx="12" cy="19" r="2"/>
+                    </svg>
                     Barva zajistit malíř? *
                   </label>
                   <div className="radio-group">
@@ -376,7 +384,10 @@ function App() {
                         onChange={(e) => handleInputChange('material', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <span className="icon">✅</span>
+                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <circle cx="12" cy="12" r="10"/>
+                      </svg>
                       Ano
                     </label>
                     <label className="radio-option">
@@ -388,7 +399,11 @@ function App() {
                         onChange={(e) => handleInputChange('material', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <span className="icon">❌</span>
+                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M15 9l-6 6"/>
+                        <path d="M9 9l6 6"/>
+                      </svg>
                       Ne
                     </label>
                   </div>
@@ -396,7 +411,10 @@ function App() {
 
                 <div>
                   <label className="input-label mb-3 block">
-                    <span className="icon">📦</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                      <rect x="8" y="8" width="8" height="8" rx="1" ry="1"/>
+                    </svg>
                     Posunutí a zakrytí nábytku? *
                   </label>
                   <div className="radio-group">
@@ -409,7 +427,10 @@ function App() {
                         onChange={(e) => handleInputChange('furnitureMoving', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <span className="icon">✅</span>
+                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9 12l2 2 4-4"/>
+                        <circle cx="12" cy="12" r="10"/>
+                      </svg>
                       Ano
                     </label>
                     <label className="radio-option">
@@ -421,7 +442,11 @@ function App() {
                         onChange={(e) => handleInputChange('furnitureMoving', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <span className="icon">❌</span>
+                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M15 9l-6 6"/>
+                        <path d="M9 9l6 6"/>
+                      </svg>
                       Ne
                     </label>
                   </div>
