@@ -353,7 +353,7 @@ function App() {
             {/* Materials and Services */}
             <div className="glass-panel">
               <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
-                <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg className="svg-icon type-material" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <circle cx="12" cy="12" r="10"/>
                   <circle cx="12" cy="12" r="6"/>
                   <circle cx="12" cy="12" r="2"/>
@@ -363,10 +363,9 @@ function App() {
               <div className="grid md:grid-cols-2 gap-8">
                 <div>
                   <label className="input-label mb-3 block">
-                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 1v6l4-4-4-4"/>
-                      <path d="M8 8v8l4-4-4-4"/>
-                      <circle cx="12" cy="19" r="2"/>
+                    <svg className="svg-icon type-material" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 2v20"/>
+                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
                     </svg>
                     Barva zajistit malíř? *
                   </label>
@@ -380,11 +379,12 @@ function App() {
                         onChange={(e) => handleInputChange('material', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 12l2 2 4-4"/>
-                        <circle cx="12" cy="12" r="10"/>
+                      <svg className="svg-icon positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2v20"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        <circle cx="18" cy="6" r="2"/>
                       </svg>
-                      Ano
+                      Ano, malíř zajistí
                     </label>
                     <label className="radio-option">
                       <input
@@ -395,19 +395,19 @@ function App() {
                         onChange={(e) => handleInputChange('material', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M15 9l-6 6"/>
-                        <path d="M9 9l6 6"/>
+                      <svg className="svg-icon negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                        <circle cx="18" cy="8" r="2"/>
                       </svg>
-                      Ne
+                      Ne, mám vlastní
                     </label>
                   </div>
                 </div>
 
                 <div>
                   <label className="input-label mb-3 block">
-                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="svg-icon type-material" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
                       <rect x="8" y="8" width="8" height="8" rx="1" ry="1"/>
                     </svg>
@@ -423,11 +423,12 @@ function App() {
                         onChange={(e) => handleInputChange('furnitureMoving', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <svg className="svg-icon positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <rect x="8" y="8" width="8" height="8" rx="1" ry="1"/>
                         <path d="M9 12l2 2 4-4"/>
-                        <circle cx="12" cy="12" r="10"/>
                       </svg>
-                      Ano
+                      Ano, potřebuji
                     </label>
                     <label className="radio-option">
                       <input
@@ -438,12 +439,13 @@ function App() {
                         onChange={(e) => handleInputChange('furnitureMoving', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
+                      <svg className="svg-icon negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <rect x="8" y="8" width="8" height="8" rx="1" ry="1"/>
                         <path d="M15 9l-6 6"/>
                         <path d="M9 9l6 6"/>
                       </svg>
-                      Ne
+                      Ne, vyřeším sám
                     </label>
                   </div>
                 </div>
