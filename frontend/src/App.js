@@ -200,11 +200,11 @@ function App() {
           <h1 className="text-4xl font-bold text-gray-700 mb-2" style={{fontFamily: 'Touche Medium, sans-serif', letterSpacing: '0.05em'}}>
             Cena a termín
           </h1>
-          <div className="w-16 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto mb-4"></div>
-          <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto" style={{fontFamily: 'Touche, sans-serif'}}>
+          <div class="w-16 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 mx-auto mb-4"></div>
+          <p className="text-slate-600 leading-relaxed max-w-2xl mx-auto" style={{fontFamily: 'Touche, sans-serif'}}>
             Spočítejte si sami cenu a určete termín startu realizace zakázky. Ceny jsou přibližné. Přesnou cenu upřesníme vždy až osobně na místě.
           </p>
-          <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto mt-2" style={{fontFamily: 'Touche, sans-serif'}}>
+          <p className="text-slate-600 leading-relaxed max-w-2xl mx-auto mt-2" style={{fontFamily: 'Touche, sans-serif'}}>
             Pokud jste s přibližnou cenou spokojeni vyplňte prosím všechna pole a klikněte na odeslat. Ozveme se Vám nejpozději do 24 hodin a domluvíme podrobnosti.
           </p>
         </div>
