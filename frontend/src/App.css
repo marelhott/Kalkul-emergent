@@ -177,19 +177,39 @@ body {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-  fill: currentColor;
+  fill: none;
+  stroke: #6b7280;
+  transition: stroke 0.3s ease;
 }
 
 .section-title .svg-icon {
   width: 24px;
   height: 24px;
+  stroke: #4b5563;
 }
 
 .radio-option .svg-icon {
   margin-right: 4px;
   width: 18px;
   height: 18px;
+  stroke: #64748b;
 }
+
+.input-label .svg-icon {
+  stroke: #64748b;
+}
+
+/* Different color shades for different sections */
+.svg-icon.type-surface { stroke: #374151; }
+.svg-icon.type-repair { stroke: #4b5563; }
+.svg-icon.type-material { stroke: #6b7280; }
+.svg-icon.type-contact { stroke: #4f46e5; }
+.svg-icon.type-info { stroke: #059669; }
+.svg-icon.type-date { stroke: #dc2626; }
+
+/* Positive/Negative icons */
+.svg-icon.positive { stroke: #059669; }
+.svg-icon.negative { stroke: #dc2626; }
 
 /* Icon Styles */
 .icon {
