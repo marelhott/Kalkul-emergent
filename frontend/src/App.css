@@ -164,25 +164,31 @@ body {
 .price-display {
   font-size: 2.2rem;
   font-weight: 900;
-  background: linear-gradient(135deg, #1e40af, #7c3aed, #059669);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #374151;
   margin-bottom: 32px;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   line-height: 1;
   position: relative;
-  animation: priceGlow 3s ease-in-out infinite alternate;
   font-family: 'Touche Medium', sans-serif;
 }
 
-@keyframes priceGlow {
-  0% {
-    filter: drop-shadow(0 0 5px rgba(30, 64, 175, 0.3));
-  }
-  100% {
-    filter: drop-shadow(0 0 15px rgba(124, 58, 237, 0.4));
-  }
+/* SVG Icons */
+.svg-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  fill: currentColor;
+}
+
+.section-title .svg-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.radio-option .svg-icon {
+  margin-right: 4px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Icon Styles */
