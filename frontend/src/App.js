@@ -215,7 +215,10 @@ function App() {
             {/* Type and Area */}
             <div className="glass-panel">
               <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
-                <span className="icon">🏠</span>
+                <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
                 Typ plochy *
               </h3>
               <div className="radio-group mb-6">
@@ -228,7 +231,11 @@ function App() {
                     onChange={(e) => handleInputChange('selectedWork', e.target.value)}
                   />
                   <span className="radio-custom"></span>
-                  <span className="icon">📐</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="12" y1="3" x2="12" y2="21"/>
+                  </svg>
                   Plocha podlahy
                 </label>
                 <label className="radio-option">
@@ -240,14 +247,22 @@ function App() {
                     onChange={(e) => handleInputChange('selectedWork', e.target.value)}
                   />
                   <span className="radio-custom"></span>
-                  <span className="icon">🧱</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <path d="M3 9h18"/>
+                  </svg>
                   Plocha stěny
                 </label>
               </div>
 
               <div className="prominent-input-section">
                 <label className="prominent-input-label">
-                  <span className="icon">📏</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                    <polyline points="7.5,4.21 12,6.81 16.5,4.21"/>
+                    <polyline points="7.5,19.79 7.5,14.6 3,12"/>
+                    <polyline points="21,12 16.5,14.6 16.5,19.79"/>
+                  </svg>
                   Celková plocha (m²) - bílá barva *
                 </label>
                 <input
@@ -261,7 +276,13 @@ function App() {
 
               <div className="mt-6">
                 <h3 className="section-title" style={{fontFamily: 'Touche Medium, sans-serif'}}>
-                  <span className="icon">🔧</span>
+                  <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 12l2 2 4-4"/>
+                    <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+                    <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+                    <path d="M13 12h3"/>
+                    <path d="M8 12H5"/>
+                  </svg>
                   Typ opravy *
                 </h3>
                 <div className="radio-group">
@@ -274,7 +295,11 @@ function App() {
                       onChange={(e) => handleInputChange('repairType', e.target.value)}
                     />
                     <span className="radio-custom"></span>
-                    <span className="icon">🔨</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M12 1v6m0 6v6"/>
+                      <path d="M1 12h6m6 0h6"/>
+                    </svg>
                     Malé
                   </label>
                   <label className="radio-option">
@@ -286,7 +311,11 @@ function App() {
                       onChange={(e) => handleInputChange('repairType', e.target.value)}
                     />
                     <span className="radio-custom"></span>
-                    <span className="icon">🛠️</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="6"/>
+                      <path d="M12 2v4m0 8v4"/>
+                      <path d="M2 12h4m8 0h4"/>
+                    </svg>
                     Střední
                   </label>
                   <label className="radio-option">
@@ -298,7 +327,11 @@ function App() {
                       onChange={(e) => handleInputChange('repairType', e.target.value)}
                     />
                     <span className="radio-custom"></span>
-                    <span className="icon">⚒️</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 2v20"/>
+                      <path d="M2 12h20"/>
+                    </svg>
                     Velké
                   </label>
                   <label className="radio-option">
@@ -310,7 +343,11 @@ function App() {
                       onChange={(e) => handleInputChange('repairType', e.target.value)}
                     />
                     <span className="radio-custom"></span>
-                    <span className="icon">✨</span>
+                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M9 9l6 6"/>
+                      <path d="M15 9l-6 6"/>
+                    </svg>
                     Žádné
                   </label>
                 </div>
