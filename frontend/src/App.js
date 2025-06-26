@@ -454,7 +454,7 @@ function App() {
               <div className="grid md:grid-cols-2 gap-8 mt-6">
                 <div>
                   <label className="input-label mb-3 block">
-                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="svg-icon type-material" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
                       <polyline points="9,22 9,12 15,12 15,22"/>
                     </svg>
@@ -470,11 +470,11 @@ function App() {
                         onChange={(e) => handleInputChange('emptySpace', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 12l2 2 4-4"/>
-                        <circle cx="12" cy="12" r="10"/>
+                      <svg className="svg-icon positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9,22 9,12 15,12 15,22"/>
                       </svg>
-                      Ano
+                      Ano, prázdný
                     </label>
                     <label className="radio-option">
                       <input
@@ -485,21 +485,23 @@ function App() {
                         onChange={(e) => handleInputChange('emptySpace', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M15 9l-6 6"/>
-                        <path d="M9 9l6 6"/>
+                      <svg className="svg-icon negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <rect x="8" y="14" width="8" height="4"/>
+                        <rect x="6" y="12" width="4" height="2"/>
+                        <rect x="14" y="12" width="4" height="2"/>
                       </svg>
-                      Ne
+                      Ne, zařízený
                     </label>
                   </div>
                 </div>
 
                 <div>
                   <label className="input-label mb-3 block">
-                    <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    <svg className="svg-icon type-material" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                      <line x1="8" y1="21" x2="16" y2="21"/>
+                      <line x1="12" y1="17" x2="12" y2="21"/>
                     </svg>
                     Koberce na podlaze *
                   </label>
@@ -513,11 +515,13 @@ function App() {
                         onChange={(e) => handleInputChange('carpets', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M9 12l2 2 4-4"/>
-                        <circle cx="12" cy="12" r="10"/>
+                      <svg className="svg-icon positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                        <path d="M6 7h12"/>
+                        <path d="M6 11h12"/>
+                        <path d="M6 15h12"/>
                       </svg>
-                      Ano
+                      Ano, jsou koberce
                     </label>
                     <label className="radio-option">
                       <input
@@ -528,12 +532,11 @@ function App() {
                         onChange={(e) => handleInputChange('carpets', e.target.value)}
                       />
                       <span className="radio-custom"></span>
-                      <svg className="svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M15 9l-6 6"/>
-                        <path d="M9 9l6 6"/>
+                      <svg className="svg-icon negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="2" y="8" width="20" height="8" rx="2" ry="2"/>
+                        <path d="M6 12h12"/>
                       </svg>
-                      Ne
+                      Ne, holá podlaha
                     </label>
                   </div>
                 </div>
